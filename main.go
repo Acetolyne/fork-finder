@@ -23,14 +23,14 @@ func main() {
 	allFlag := flag.Bool("a", false, "Print all forked repositories instead of the one with the latest commits")
 	flag.Parse()
 
-	if len(os.Args) > 1 {
-		s := os.Args[1]
-		//repo := s[strings.LastIndex(s, "/")+1:]
-		//user := s[strings.LastIndex(s, "/")+1:]
+	args := len(os.Args) - 1
+	if len(os.Args) > 1 && os.Args[args] != "-a" {
+		s := os.Args[args]
 		ss := strings.Split(s, "/")
 		reponame = ss[len(ss)-1]
 		user = ss[len(ss)-2]
 	}
+	fmt.Println(user, reponame)
 	if user == "" || reponame == "" {
 		fmt.Printf("please provide the base repository to search in the format fork-finder REPO where repo is the url of the base repository, can be any url format or just the name of the repository like Acetolyne/fork-finder")
 		os.Exit(1)
